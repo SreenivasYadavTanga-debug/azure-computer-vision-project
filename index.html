@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Analyzer</title>
+</head>
+<body style="text-align:center; font-family:Arial;">
+
+    <h1>Image Analyzer 👁️</h1>
+    <p>Upload an image to analyze</p>
+
+    <input type="file" id="imageInput">
+    <br><br>
+
+    <button onclick="showMessage()">Analyze</button>
+
+    <p id="result"></p>
+
+    <script>
+        function showMessage() {
+            document.getElementById("result").innerHTML =
+                "Image uploaded! (Backend connection next step)";
+        }
+    </script>
+
+</body>
+</html>
