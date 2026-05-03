@@ -1,24 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Image Analyzer</title>
+    <title>Image Analyzer (Free Version)</title>
 </head>
 <body style="text-align:center; font-family:Arial;">
 
     <h1>Image Analyzer 👁️</h1>
-    <p>Upload an image to analyze</p>
+    <p>Upload an image to preview</p>
 
-    <input type="file" id="imageInput">
+    <input type="file" id="imageInput" accept="image/*">
     <br><br>
 
-    <button onclick="showMessage()">Analyze</button>
+    <img id="preview" width="300" style="display:none; border:1px solid #ccc;">
+    
+    <br><br>
+
+    <button onclick="analyzeImage()">Analyze</button>
 
     <p id="result"></p>
 
     <script>
-        function showMessage() {
-            document.getElementById("result").innerHTML =
-                "Image uploaded! (Backend connection next step)";
+        const input = document.getElementById("imageInput");
+        const preview = document.getElementById("preview");
+
+        input.addEventListener("change", function() {
+            const file = input.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = "block";
+            }
+        });
+
+        function analyzeImage() {
+            const file = input.files[0];
+
+            if (!file) {
+                document.getElementById("result").innerText = "Please select an image!";
+                return;
+            }
+
+            document.getElementById("result").innerText =
+                "Demo Analysis: This is a sample image (no AI backend connected)";
         }
     </script>
 
