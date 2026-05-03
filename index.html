@@ -1,20 +1,17 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Free AI Image Analyzer</title>
+    <title>AI Image Analyzer</title>
 </head>
 
 <body style="text-align:center; font-family:Arial;">
 
-    <h1>AI Image Analyzer 🤖 (Free API)</h1>
-    <p>Upload an image to get real AI description</p>
+    <h1>AI Image Analyzer 🤖</h1>
+    <p>Upload an image to get AI description</p>
 
-    <input type="file" id="imageInput" accept="image/*">
-    <br><br>
+    <input type="file" id="imageInput" accept="image/*"><br><br>
 
-    <img id="preview" width="300" style="display:none; border:1px solid #ccc;">
-    <br><br>
+    <img id="preview" width="300" style="display:none; border:1px solid #ccc;"><br><br>
 
     <button onclick="analyzeImage()">Analyze</button>
 
@@ -40,14 +37,17 @@
                 return;
             }
 
-            document.getElementById("result").innerText = "Analyzing with AI... 🤖";
+            document.getElementById("result").innerText = "Analyzing...";
 
             try {
                 const response = await fetch(
                     "https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-base",
                     {
                         method: "POST",
-                       
+                        headers: {
+                            "Authorization": "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",
+                            "Content-Type": "application/octet-stream"
+                        },
                         body: file
                     }
                 );
@@ -55,11 +55,11 @@
                 const data = await response.json();
 
                 document.getElementById("result").innerText =
-                    "AI Result: " + (data[0]?.generated_text || "No result found");
+                    "AI Result: " + (data[0]?.generated_text || "No result");
 
             } catch (error) {
                 document.getElementById("result").innerText =
-                    "Error connecting to AI. Try again.";
+                    "Error connecting to AI.";
             }
         }
     </script>
